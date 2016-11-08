@@ -13,7 +13,7 @@ find_package(GLIB)
 
 option(PAUL_BUILD "build on ubuntu" OFF)
 if(PAUL_BUILD)
-include_directories("/usr/lib/x86_64-linux-gnu/gstreamer-1.0/")
+include_directories("/usr/lib/x86_64-linux-gnu/gstreamer-1.0/include")
 
 else()
 
