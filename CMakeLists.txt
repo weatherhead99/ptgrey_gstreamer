@@ -10,7 +10,20 @@ find_package(GLIB)
 
 #HACK for opensuse gstreamer
 #TODO: move to findGStreamer.cmake
+
+option(PAUL_BUILD "build on ubuntu" OFF)
+if(PAUL_BUILD)
+include_directories("/usr/lib/x86_64-linux-gnu/gstreamer-1.0/")
+
+else()
+
 include_directories("/usr/lib64/gstreamer-1.0/include/")
+
+endif()
+
+
+
+
 
 find_path(FLYCAP_INCLUDE_DIR FlyCapture2.h PATH_SUFFIXES flycapture)
 find_library(flycap flycapture)
