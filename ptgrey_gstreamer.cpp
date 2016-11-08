@@ -308,7 +308,9 @@ int main(int argc, char *argv[])
  app->src = (GstAppSrc*)gst_element_factory_make("appsrc", "mysrc");
  //app->encoder = gst_element_factory_make("nv_omx_h264enc", "nvidEnc");
  //app->decoder = gst_element_factory_make("decodebin", "mydecoder");
- app->ffmpeg = gst_element_factory_make("ffmpegcolorspace", "myffmpeg");
+ 
+ //HACK: gst-1.0 compat
+ app->ffmpeg = gst_element_factory_make("videoconvert", "myffmpeg");
  app->xvimagesink = gst_element_factory_make("xvimagesink", "myvsink");
 
  g_assert(app->src);
@@ -338,6 +340,11 @@ int main(int argc, char *argv[])
 if(!gst_element_link(app->ffmpeg, app->xvimagesink)){
  g_warning("failed to link ffmpeg and xvsink");
 }
+
+if(!gst_element_link(reinterpret_cast<GstElement*>(app->src), app->ffmpeg))
+{
+  g_warning("failed to link src and ffmpeg");
+};
 
  state_ret = gst_element_set_state((GstElement*)app->pipeline, GST_STATE_PLAYING);
  g_warning("set state returned %d\n", state_ret);
