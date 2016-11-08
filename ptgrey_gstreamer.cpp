@@ -77,7 +77,7 @@ static gboolean read_data(gst_app_t *app)
    
 //    HACK: gst-1.0 compat
 //    video_caps_text << "video/x-raw-rgb,bpp=(int)24,depth=(int)24,endianness=(int)4321,red_mask=(int)16711680,green_mask=(int)65280,blue_mask=(int)255,width=(int)1288,height=(int)964,framerate=(fraction)0/1";
-   video_caps_text << "video/x-raw,format=(string)rgb,bpp=(int)24,depth=(int)24,endianness=(int)4321,red_mask=(int)16711680,green_mask=(int)65280,blue_mask=(int)255,width=(int)1288,height=(int)964,framerate=(fraction)0/1";
+   video_caps_text << "video/x-raw,format=(string)RGB,width=(int)1288,height=(int)964";
    caps_source = gst_caps_from_string( video_caps_text.str().c_str() );
    cout<<video_caps_text.str()<<endl;
    if( !GST_IS_CAPS( caps_source) ){
